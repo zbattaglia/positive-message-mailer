@@ -12,8 +12,13 @@ class App extends Component {
     });
   }
 
+  componentDidMount() {
+    this.props.dispatch({ type: 'FETCH_ELEMENTS' });
+  }
+
   handleClick = () => {
-    this.props.dispatch({ type: 'ADD_ELEMENT', payload: this.state.newElement });
+    // make a post request
+    this.props.dispatch({ type: 'ADD_ELEMENT', payload: this.state });
     this.setState({
       newElement: '',
     });
