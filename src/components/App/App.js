@@ -15,9 +15,6 @@ class App extends Component {
 
   getElements = () => {
     axios.get('/api/element').then(response => {
-      // What do we need to do here?
-      // things are being added to the list from the server
-      // so instead we need to completely replace the list
       this.props.dispatch({ type: 'SET_ELEMENTS', payload: response.data });
   })
   .catch(error => {
