@@ -9,17 +9,24 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.7",
-    "react-scripts": "1.1.1",
+    "react-scripts": "^2.1.1",
     "redux": "^3.7.2",
+    "redux-logger": "^3.0.6",
     "redux-saga": "^0.16.0"
   },
   "scripts": {
     "start": "react-scripts build && node server/server.js",
     "dev": "npm run dev:server | npm run dev:client",
-    "dev:client": "react-scripts start",
-    "dev:server": "nodemon server/server.js",
+    "client": "react-scripts start",
+    "server": "nodemon server/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
