@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 class App extends Component {
   state = {
@@ -13,16 +14,36 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch({ type: 'FETCH_ELEMENTS' });
+    axios.get('/api/element').then(response => {
+      // What do we need to do here?
+      // things are being added to the list from the server
+      // so instead we need to completely replace the list
+      this.props.dispatch({ type: 'SET_ELEMENTS', payload: response.data });
+  })
+  .catch(error => {
+      console.log('error with element get request', error);
+  });
   }
 
   handleClick = () => {
-    // make a post request
-    this.props.dispatch({ type: 'ADD_ELEMENT', payload: this.state });
-    this.setState({
-      newElement: '',
+    axios.post('/api/element', this.state).then(() => {
+        axios.get('/api/element').then(response => {
+            // What do we need to do here?
+            // things are being added to the list from the server
+            // so instead we need to completely replace the list
+            this.props.dispatch({ type: 'SET_ELEMENTS', payload: response.data });
+        })
+        .catch(error => {
+            console.log('error with element get request', error);
+        });
+    })
+    .catch(error => {
+        console.log('error with element get request', error);
     });
-  }
+    this.setState({
+        newElement: '',
+    });
+}
 
   render() {
     return (
