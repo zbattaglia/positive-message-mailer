@@ -26,12 +26,7 @@ const secondReducer = (state = 100, action) => {
 };
 
 const elementListReducer = (state = [], action) => {
-    // if (action.type === 'ADD_ELEMENT') {
-    //     console.log(`The element was ${action.payload}`);
-    // }
     switch (action.type) {
-        // case 'ADD_ELEMENT':
-        //     return [ ...state, action.payload ];
         case 'SET_ELEMENTS':
             return action.payload;
         default:

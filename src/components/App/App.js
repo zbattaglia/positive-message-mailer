@@ -13,7 +13,7 @@ class App extends Component {
     });
   }
 
-  componentDidMount() {
+  getElements = () => {
     axios.get('/api/element').then(response => {
       // What do we need to do here?
       // things are being added to the list from the server
@@ -25,24 +25,21 @@ class App extends Component {
   });
   }
 
+  componentDidMount() {
+    this.getElements();
+  }
+
   handleClick = () => {
     axios.post('/api/element', this.state).then(() => {
-        axios.get('/api/element').then(response => {
-            // What do we need to do here?
-            // things are being added to the list from the server
-            // so instead we need to completely replace the list
-            this.props.dispatch({ type: 'SET_ELEMENTS', payload: response.data });
-        })
-        .catch(error => {
-            console.log('error with element get request', error);
-        });
+        this.getElements();
+        this.setState({
+          newElement: '',
+      });
     })
     .catch(error => {
         console.log('error with element get request', error);
     });
-    this.setState({
-        newElement: '',
-    });
+    
 }
 
   render() {
