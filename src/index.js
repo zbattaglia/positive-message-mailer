@@ -18,6 +18,15 @@ const messageReducer = (state = [], action) => {
     }
 };
 
+const userReducer = (state = {}, action) => {
+    switch(action.type) {
+        case 'UPDATE_INFO':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
 function* getMessageSaga( action ) {
     console.log( 'In getMessageSaga', action );
     try {
@@ -33,7 +42,7 @@ function* getMessageSaga( action ) {
 function* sendMessageSaga( action ) {
     console.log( 'In send message saga', action )
     try {
-        const response = yield axios.post( '/message', {message: action.payload} );
+        const response = yield axios.post( '/message', action.payload );
         console.log( 'Sent message', response );
     }
     catch (error) {
@@ -53,7 +62,8 @@ const sagaMiddleware = createSagaMiddleware();
 const storeInstance = createStore(
 
     combineReducers({
-        messageReducer
+        messageReducer,
+        userReducer,
     }),
     applyMiddleware(sagaMiddleware, logger),
 );

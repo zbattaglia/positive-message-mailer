@@ -9,14 +9,17 @@ const messageList = require('../modules/messageList');
 
 // post route to "Post" the message to the user's email
 router.post('/', (req, res) => {
-  console.log( 'Got message on server', req.body.message );
-  console.log( 'password =', process.env.PASSWORD)
-  sendEmail( req.body.message );
+  console.log( 'Got message on server', req.body );
+  sendEmail( req.body );
   res.sendStatus(200);
 }); // end POST route
 
   // sendEmail function uses nodemailer to send email containing message passed in the POST
-  sendEmail = ( message ) => {
+  sendEmail = ( emailInfo ) => {
+    const email = emailInfo.userInfo.email;
+    let recipient = emailInfo.userInfo.recipient;
+    let sender = emailInfo.userInfo.user;
+    let message = emailInfo.message;
     let transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
       auth: {
@@ -27,9 +30,9 @@ router.post('/', (req, res) => {
 
     const mailOptions = {
       from: `${process.env.EMAIL}`,
-      to: 'zbattaglia3@gmail.com',
-      subject: 'testing automated emailing',
-      text: message
+      to: `${email}`,
+      subject: `A positive message for you.`,
+      text: `Hey ${recipient}! Your friend ${sender} has some positive thoughts to send your way. ${message}`
     };
 
     transporter.sendMail( mailOptions, (err, info) => {

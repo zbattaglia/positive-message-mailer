@@ -19,11 +19,12 @@ handleChange = ( event, propName ) => {
 
 handleClick = () => {
     console.log( 'Got User info' );
-    // this.props.dispatch({ action: 'UPDATE_INFO'})
     this.setState({
         loggedIn: true,
     })
+    this.props.dispatch({ type: 'UPDATE_INFO', payload: {...this.state, loggedIn: true} })
 }
+
 
 renderUser() {
     if ( this.state.loggedIn === false ) {
@@ -49,8 +50,4 @@ renderUser() {
   }
 }
 
-const mapReduxStateToProps = reduxState => ({
-    
-});
-
-export default connect(mapReduxStateToProps)(UserInfo);
+export default connect()(UserInfo);
