@@ -9,6 +9,27 @@ import { takeEvery, put } from 'redux-saga/effects'; // must be imported for sag
 import logger from 'redux-logger';
 import axios from 'axios';
 
+const messageReducer = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_MESSAGES':
+            return action.payload;
+        default:
+            return state;
+    }
+};
+
+function* getMessageSaga( action ) {
+    console.log( 'In getMessageSaga', action );
+    try {
+        const response = yield axios.get( '/message' );
+        console.log( 'Got messageList', response.data );
+        yield put( { type: 'SET_MESSAGES', payload: response.data } )
+    }
+    catch (error) {
+        console.log( 'Error getting messageList', error );
+    }
+}
+
 function* sendMessageSaga( action ) {
     console.log( 'In send message saga', action )
     try {
@@ -23,6 +44,7 @@ function* sendMessageSaga( action ) {
 // this is the saga that will watch for actions
 function* watcherSaga() {
     yield takeEvery( 'SEND_MESSAGE', sendMessageSaga );
+    yield takeEvery( 'GET_MESSAGES', getMessageSaga );
 }
 
 
@@ -31,7 +53,7 @@ const sagaMiddleware = createSagaMiddleware();
 const storeInstance = createStore(
 
     combineReducers({
-
+        messageReducer
     }),
     applyMiddleware(sagaMiddleware, logger),
 );
