@@ -26,7 +26,7 @@ router.post('/', (req, res) => {
     })
 
     const mailOptions = {
-      from: 'zbattaglia3@gmail.com',
+      from: `${process.env.EMAIL}`,
       to: 'zbattaglia3@gmail.com',
       subject: 'testing automated emailing',
       text: message

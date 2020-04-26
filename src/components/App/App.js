@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import UserInfo from '../UserInfo/UserInfo';
 import Messages from '../Messages/Messages';
 
 class App extends Component {
@@ -16,6 +17,7 @@ class App extends Component {
         <header>
           <h1>Positive Message Mailer!</h1>
         </header>
+        <UserInfo />
         <Messages />
         <footer>
           <p>See more messages at <a href="https://www.berries.com/blog/positive-quotes">berries.com</a></p>
