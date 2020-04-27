@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import UserInfo from '../UserInfo/UserInfo';
 import Messages from '../Messages/Messages';
+// scheduledMessages is the automated emailing component
+import ScheduledMessages from '../ScheduledMessages/ScheduledMessages';
 
 class App extends Component {
 
@@ -19,6 +21,7 @@ class App extends Component {
         </header>
         <UserInfo />
         <Messages />
+        <ScheduledMessages />
         <footer>
           <p>See more messages at <a href="https://www.berries.com/blog/positive-quotes">berries.com</a></p>
         </footer>

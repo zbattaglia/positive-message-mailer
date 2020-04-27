@@ -5,9 +5,11 @@ import registerServiceWorker from './registerServiceWorker';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
-import { takeEvery, put } from 'redux-saga/effects'; // must be imported for saga function
+import { takeEvery, put } from 'redux-saga/effects';
 import logger from 'redux-logger';
 import axios from 'axios';
+
+const schedule = require('./components/ScheduledMessages/ScheduledMessages');
 
 const messageReducer = (state = [], action) => {
     switch (action.type) {

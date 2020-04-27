@@ -20,6 +20,18 @@ router.post('/', (req, res) => {
     let recipient = emailInfo.userInfo.recipient;
     let sender = emailInfo.userInfo.user;
     let message = emailInfo.message;
+    let body = '';
+    if( sender === 'system' ) {
+      body = `Hey ${recipient}! We wanted to start your day off with some positive thoughts!<br /><br />
+              ${message}<br /><br />
+              To see some more motivational messages and send one of your own click <a href="http://localhost:3000/">Here</a></p>`
+    }
+    else {
+      body = `<p>Hey ${recipient}! Your friend ${sender} has some positive thoughts to send your way. <br /><br />
+              ${message} <br /><br />
+              To see some more motivational messages and send one of your own click <a href="http://localhost:3000/">Here</a></p>`
+    }
+
     let transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
       auth: {
@@ -32,7 +44,9 @@ router.post('/', (req, res) => {
       from: `${process.env.EMAIL}`,
       to: `${email}`,
       subject: `A positive message for you.`,
-      text: `Hey ${recipient}! Your friend ${sender} has some positive thoughts to send your way. ${message}`
+      html:`<p>Hey ${recipient}! Your friend ${sender} has some positive thoughts to send your way. <br /><br />
+            ${message} <br /><br />
+            To see some more motivational messages and send one of your own click <a href="http://localhost:3000/">Here</a></p>`
     };
 
     transporter.sendMail( mailOptions, (err, info) => {
