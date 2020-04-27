@@ -21,6 +21,8 @@ router.post('/', (req, res) => {
     let sender = emailInfo.userInfo.user;
     let message = emailInfo.message;
     let body = '';
+    // if statement to determine if the email is automated (sent from the system) or manually sent from a user
+    // adjusts the email content accordingly
     if( sender === 'system' ) {
       body = `Hey ${recipient}! We wanted to start your day off with some positive thoughts!<br /><br />
               ${message}<br /><br />
@@ -32,6 +34,8 @@ router.post('/', (req, res) => {
               To see some more motivational messages and send one of your own click <a href="http://localhost:3000/">Here</a></p>`
     }
 
+    // nodemailer confiuration. host email is a gmail account
+    // username and password are env variables set in the .env file
     let transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
       auth: {
@@ -40,13 +44,12 @@ router.post('/', (req, res) => {
       }
     })
 
+    // recipients email is obtained from req.body
     const mailOptions = {
       from: `${process.env.EMAIL}`,
       to: `${email}`,
       subject: `A positive message for you.`,
-      html:`<p>Hey ${recipient}! Your friend ${sender} has some positive thoughts to send your way. <br /><br />
-            ${message} <br /><br />
-            To see some more motivational messages and send one of your own click <a href="http://localhost:3000/">Here</a></p>`
+      html:`${body}`
     };
 
     transporter.sendMail( mailOptions, (err, info) => {

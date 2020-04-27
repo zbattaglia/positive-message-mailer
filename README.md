@@ -4,31 +4,25 @@
 
 _Duration: 2 days_
 
-Directly above this is how long it took you to develop the project. Your project description goes here. What problem did you solve? How did you solve it? 
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquam at massa in faucibus. Etiam volutpat, risus non mollis convallis, velit nisi pulvinar mi, eu faucibus orci nisi eget nibh. Integer a velit pretium, volutpat arcu eleifend, fringilla elit. Cras erat sapien, convallis venenatis tellus vitae, feugiat dictum felis.
-
-Suspendisse euismod volutpat aliquet. Maecenas vulputate mauris in pellentesque facilisis. Phasellus varius malesuada semper. Cras sollicitudin diam mollis maximus aliquam.
-
-## Screen Shot
-
-Include one or two screen shots of your project here (optional). Remove if unused.
+This application allows users to send a positive quote from a list to another person via email or schedule automated emails be sent to users on a schedule they choose. This project was used to test nodemailer and node-cron and use Cirrus for styling.
 
 ### Prerequisites
 
 Link to software that is required to install the app (e.g. node).
 
 - [Node.js](https://nodejs.org/en/)
-- List other prerequisites here
+- [Nodemailer](https://nodemailer.com/about/)
+- [node-cron](https://www.npmjs.com/package/node-cron)
+- [Cirrus.CSS](https://spiderpig86.github.io/Cirrus/)
 
 ## Installation
-
-How do you get your application up and running? This is a step by step list for how another developer could get this project up and running. The good target audience in terms of knowledge, would be a fellow Primer from another cohort being able to spin up this project. Note that you do not need a paragraph here to intro Installation. It should be step-by-step.
-
+NOTE: Currently to use the app a valid [Gmail](https://mail.google.com/mail/) account is required.
 If your application has secret keys (for example --  Twilio), make sure you tell them how to set that up, both in getting the key and then what to call it in the `.env` file.
 
-1. Create a database named `your database name`,
-2. The queries in the `tables.sql` file are set up to create all the necessary tables and populate the needed data to allow the application to run correctly. The project is built on [Postgres](https://www.postgresql.org/download/), so you will need to make sure to have that installed. We recommend using Postico to run those queries as that was used to create the queries, 
+1. Create a .env file in the root of the programwith the following parameters (the .env will keep your information protected):
+    - PASSWORD = "Your gmail password"
+    - USERNAME = "Your gmail username"
+    - MAIL = "Your email address"
 3. Open up your editor of choice and run an `npm install`
 4. Run `npm run server` in your terminal
 5. Run `npm run client` in your terminal
@@ -37,21 +31,28 @@ If your application has secret keys (for example --  Twilio), make sure you tell
 ## Usage
 How does someone use this application? Tell a user story here.
 
-1. xxx
-2. xxx
-3. xxx
-4. xxx
-5. xxx
-6. xxx
+Manual Messaging:
+1. Fill out the information on the home page and click submit.
+2. Pick a quote you like and click the "Send Message" button and your email has been sent!
+
+Automated Messaging:
+1. In scheduledMessages.js update the 'recipient' and 'email' paramaters of the usersList variable on line 7. This simulates a database of users. The users in the userList will get a random quote emailed to them as schedule in the cron.schedule. (Default is every day at 4:30 AM) 
+2. To adjust the schedule refer to the [node-cron](https://www.npmjs.com/package/node-cron) documentation
 
 
 ## Built With
 
-List technologies and frameworks here
+- Node
+- React
+- Redux
+- Nodemailer
+- node-cron
+- Cirrus.CSS
 
 ## Acknowledgement
-Thanks to [Prime Digital Academy](www.primeacademy.io) who equipped and helped me to make this application a reality. (Thank your people)
+Thanks to [Prime Digital Academy](www.primeacademy.io) who equipped and helped me to make this application a reality.
+Thanks to Cirrus.CSS for their open styling library.
 
 ## Support
-If you have suggestions or issues, please email me at [youremail@whatever.com](www.google.com)
+If you have suggestions or issues, please email me at [zbattaglia3@gmail.com](www.google.com)
 

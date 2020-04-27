@@ -1,0 +1,10 @@
+header {
+    text-align: center;
+    border-bottom: solid;
+    background-color: yellow;
+    min-height: 5rem;
+}
+
+footer {
+    height: 10px;
+}
